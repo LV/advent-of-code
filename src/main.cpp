@@ -3,34 +3,30 @@
 #include <format>
 #include <iostream>
 #include <span>
+#include "registry.h"
 
 const int EARLIEST_AOC_YEAR = 2015;
 const int LATEST_AOC_YEAR = 2024;
 const int MIN_DAY = 1;
 const int MAX_DAY = 25;
 
-// using SolutionFunction = std::function<void()>;
-// std::unordered_map<std::string, SolutionFunction> function_registry;
-// std::string generate_key(int year, int day, int part) {
-//     return std::to_string(year) + "/day" + std::to_string(day) + "_part" + std::to_string(part);
-// }
-// 
-// void run_solution(int year, int day, int part) {
-//     auto module_path = std::format("solutions/{}/day{}.cpp", year, day);
-// 
-//     if (!std::filesystem::exists(module_path)) {
-//         std::cout << year << " Day " << day << " Part " << part << " has not been solved yet!\n";
-//         return;
-//     }
-// 
-//     std::string function_name = std::format("solve_part{}", part);
-// }
+void run_solution(int year, int day, int part) {
+    std::string key = generate_key(year, day, part);
+
+    auto it = function_registry.find(key);
+    if (it != function_registry.end()) {
+        it->second(); // Call the solution function
+    } else {
+        std::cout << year << " Day " << day << " Part " << part << " has not been solved yet!\n";
+    }
+}
 
 int main(int argc, char* argv[]) {
     std::cout << "Luis Victoria's Advent of Code Solutions\n\n";
 
     if (argc < 2) {
         std::cout << "Run with `--help` for more information\n";
+        std::cout << "Usage: ./AdventOfCode <year> <day> <part>\n";
         return 1;
     }
 
@@ -48,8 +44,8 @@ int main(int argc, char* argv[]) {
 
     if (argc == 4) {
         std::string_view year_str{argv[1]};
-        std::string_view day_str{argv[1]};
-        std::string_view part_str{argv[1]};
+        std::string_view day_str{argv[2]};
+        std::string_view part_str{argv[3]};
         int year;
         int day;
         int part;
@@ -91,10 +87,11 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        // run_solution(year, day, part);
+        run_solution(year, day, part);
         return 0;
     }
 
     std::cout << "Invalid number of arguments! Run with `--help`\n";
+    std::cout << "Usage: ./AdventOfCode <year> <day> <part>\n";
     return 1;
 }
