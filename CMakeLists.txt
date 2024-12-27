@@ -22,8 +22,12 @@ if(supported)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
 endif()
 
+# Automatically find and add all solution files
+file(GLOB_RECURSE SOLUTION_FILES "src/solutions/**/*.cpp")
+
 include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/registry.cpp
+    ${SOLUTION_FILES}  # Automatically include all solution files
 )
