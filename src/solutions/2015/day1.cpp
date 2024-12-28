@@ -2,6 +2,8 @@
 #include "registry.h"
 #include "utils.h"
 
+namespace y2015_d1 {
+
 void solve_part1() {
     std::string input = read_input(2015, 1);
 
@@ -30,7 +32,9 @@ void solve_part2() {
     std::cout << char_count << "\n";
 }
 
+} // END NAMESPACE
+
 namespace {
-    const bool registered_part1 = (register_solution("2015/day1_part1", solve_part1), true);
-    const bool registered_part2 = (register_solution("2015/day1_part2", solve_part2), true);
+    const bool registered_part1 = (register_solution("2015/day1_part1", y2015_d1::solve_part1), true);
+    const bool registered_part2 = (register_solution("2015/day1_part2", y2015_d1::solve_part2), true);
 }
