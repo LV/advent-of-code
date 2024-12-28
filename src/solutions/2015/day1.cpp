@@ -1,12 +1,21 @@
 #include <iostream>
 #include "registry.h"
+#include "utils.h"
 
 void solve_part1() {
-    std::cout << "Hello son\n";
+    std::string input = read_input(2015, 1);
+
+    int count = 0;
+    for (char ch : input) {
+        if (ch == '(') count++;
+        if (ch == ')') count--;
+    }
+
+    std::cout << count << "\n";
 }
 
 void solve_part2() {
-    std::cout << "Hello sonny\n";
+    std::string input = read_input(2015, 1);
 }
 
 namespace {
