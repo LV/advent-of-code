@@ -29,5 +29,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/registry.cpp
+    src/utils.cpp
     ${SOLUTION_FILES}  # Automatically include all solution files
 )

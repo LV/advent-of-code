@@ -22,8 +22,6 @@ void run_solution(int year, int day, int part) {
 }
 
 int main(int argc, char* argv[]) {
-    std::cout << "Luis Victoria's Advent of Code Solutions\n\n";
-
     if (argc < 2) {
         std::cout << "Run with `--help` for more information\n";
         std::cout << "Usage: ./AdventOfCode <year> <day> <part>\n";
