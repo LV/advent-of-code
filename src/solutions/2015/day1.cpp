@@ -16,6 +16,18 @@ void solve_part1() {
 
 void solve_part2() {
     std::string input = read_input(2015, 1);
+
+    int char_count = 0;
+    int count = 0;
+
+    for (char ch : input) {
+        char_count++;
+        if (ch == '(') count++;
+        if (ch == ')') count--;
+        if (count == -1) break;
+    }
+
+    std::cout << char_count << "\n";
 }
 
 namespace {
