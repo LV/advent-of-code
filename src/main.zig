@@ -7,8 +7,7 @@ const min_day: u8 = 1;
 const max_day: u8 = 25;
 
 fn runSolution(year: u16, day: u8, part: u8) !void {
-    // TODO: STUB
-    std.debug.print("{} Day {} Part {} has not been solved yet!\n", .{ year, day, part });
+    try cpp.runSolution(year, day, part);
 }
 
 pub fn main() !void {
