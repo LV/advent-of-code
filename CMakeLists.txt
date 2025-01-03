@@ -1,3 +1,4 @@
+set(CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
 cmake_minimum_required(VERSION 3.15)
 project(AdventOfCode VERSION 1.0)
 
@@ -22,8 +23,9 @@ if(supported)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
 endif()
 
-# Find Python
+# Find Python and Zig
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_program(ZIG_EXECUTABLE zig REQUIRED)
 
 # Automatically find and add all solution files
 file(GLOB_RECURSE SOLUTION_FILES "src/solutions/**/*.cpp")
@@ -31,8 +33,11 @@ file(GLOB_RECURSE SOLUTION_FILES "src/solutions/**/*.cpp")
 # Include directories
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# Add pybind11 submodule
-add_subdirectory(extern/pybind11)
+# Add Zig build target
+add_custom_target(zig_build ALL
+    COMMAND ${ZIG_EXECUTABLE} build
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
 
 # Add the main executable
 add_executable(${PROJECT_NAME}
@@ -42,8 +47,5 @@ add_executable(${PROJECT_NAME}
     ${SOLUTION_FILES}
 )
 
-# Link pybind11 and Python with your project
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    pybind11::embed
-    Python::Python
-)
+# Make main executable depend on Zig build
+add_dependencies(${PROJECT_NAME} zig_build)
