@@ -1,4 +1,3 @@
-set(CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
 cmake_minimum_required(VERSION 3.15)
 project(AdventOfCode VERSION 1.0)
 
