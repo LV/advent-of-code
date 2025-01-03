@@ -1,10 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <utility>
-#include "registry.h"
 #include "utils.h"
-
-namespace y2015_d5 {
 
 bool containsAtLeastThreeVowels(const std::string &s) {
     int vowelCount = 0;
@@ -39,24 +36,19 @@ bool isNiceString(const std::string &s) {
     return containsAtLeastThreeVowels(s) && containsAtLeastOneRepeatingLetter(s) && !containsBadStrings(s);
 }
 
-void solve_part1() {
-    std::vector<std::string> input = read_input_lines(2015, 5);
+extern "C" {
+    void solve_part1() {
+        std::vector<std::string> input = read_input_lines(2015, 5);
 
-    int count = 0;
+        int count = 0;
 
-    for (std::string str : input) {
-        if (isNiceString(str)) count++;
+        for (std::string str : input) {
+            if (isNiceString(str)) count++;
+        }
+
+        std::cout << count << "\n";
     }
 
-    std::cout << count << "\n";
-}
-
-void solve_part2() {
-}
-
-} // END NAMESPACE
-
-namespace {
-    const bool registered_part1 = (register_solution("2015/day5_part1", y2015_d5::solve_part1), true);
-    const bool registered_part2 = (register_solution("2015/day5_part2", y2015_d5::solve_part2), true);
+    void solve_part2() {
+    }
 }

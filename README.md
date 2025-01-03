@@ -5,5 +5,5 @@ My solutions for Advent of Code
 ```
 mkdir build && cd build
 cmake ..
-ninja
+cmake --build .
 ```
