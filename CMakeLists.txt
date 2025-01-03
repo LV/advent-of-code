@@ -1,49 +1,32 @@
+set(CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
 cmake_minimum_required(VERSION 3.15)
 project(AdventOfCode VERSION 1.0)
 
-# C++20 settings
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# GCC specific compiler flags
-add_compile_options(
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Werror
-    -fdiagnostics-color=always
-)
+add_compile_options(-Wall -Wextra -Wpedantic -Werror -fdiagnostics-color=always)
 
-# Optional: Enable Link Time Optimization in Release mode
-include(CheckIPOSupported)
-check_ipo_supported(RESULT supported OUTPUT error)
-if(supported)
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
-endif()
-
-# Find Python
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_program(ZIG_EXECUTABLE zig REQUIRED)
 
-# Automatically find and add all solution files
 file(GLOB_RECURSE SOLUTION_FILES "src/solutions/**/*.cpp")
 
-# Include directories
-include_directories(${PROJECT_SOURCE_DIR}/include)
-
-# Add pybind11 submodule
-add_subdirectory(extern/pybind11)
-
-# Add the main executable
-add_executable(${PROJECT_NAME}
-    src/main.cpp
-    src/registry.cpp
+# Create a shared library for C++ solutions
+add_library(cpp_solutions SHARED
+    src/solutions.cpp
     src/utils.cpp
     ${SOLUTION_FILES}
 )
 
-# Link pybind11 and Python with your project
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    pybind11::embed
-    Python::Python
+target_include_directories(cpp_solutions PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+# Add Zig executable build
+add_custom_target(aoc ALL
+    COMMAND ${ZIG_EXECUTABLE} build
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
+
+add_dependencies(aoc cpp_solutions)

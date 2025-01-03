@@ -1,9 +1,6 @@
 #include <algorithm>
 #include <iostream>
-#include "registry.h"
 #include "utils.h"
-
-namespace y2015_d2 {
 
 class Rectangle {
 private:
@@ -41,33 +38,29 @@ public:
     }
 };
 
-void solve_part1() {
-    std::vector<std::string> input = read_input_lines(2015, 2);
+extern "C" {
+    void solve_2015_day2_part1() {
+        std::vector<std::string> input = read_input_lines(2015, 2);
 
-    int total = 0;
-    for (std::string line : input) {
-        Rectangle r = Rectangle(line);
-        total += r.surface_area() + r.smallest_side_area();
+        int total = 0;
+        for (std::string line : input) {
+            Rectangle r = Rectangle(line);
+            total += r.surface_area() + r.smallest_side_area();
+        }
+
+        std::cout << total << "\n";
     }
 
-    std::cout << total << "\n";
-}
+    void solve_2015_day2_part2() {
+        std::vector<std::string> input = read_input_lines(2015, 2);
 
-void solve_part2() {
-    std::vector<std::string> input = read_input_lines(2015, 2);
+        int total = 0;
+        for (std::string line : input) {
+            Rectangle r = Rectangle(line);
+            total += r.least_ribbon() + r.area();
+        }
 
-    int total = 0;
-    for (std::string line : input) {
-        Rectangle r = Rectangle(line);
-        total += r.least_ribbon() + r.area();
+        std::cout << total << "\n";
     }
-
-    std::cout << total << "\n";
 }
 
-} // END NAMESPACE
-
-namespace {
-    const bool registered_part1 = (register_solution("2015/day2_part1", y2015_d2::solve_part1), true);
-    const bool registered_part2 = (register_solution("2015/day2_part2", y2015_d2::solve_part2), true);
-}
