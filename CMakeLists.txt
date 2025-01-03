@@ -16,6 +16,7 @@ file(GLOB_RECURSE SOLUTION_FILES "src/solutions/**/*.cpp")
 
 # Create a shared library for C++ solutions
 add_library(cpp_solutions SHARED
+    src/solutions.cpp
     src/utils.cpp
     ${SOLUTION_FILES}
 )
