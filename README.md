@@ -1,9 +1,13 @@
 # Advent of Code
 My solutions for Advent of Code
 
-## Building
+## Getting Started
 ```
-mkdir build && cd build
-cmake ..
-cmake --build .
+make build
+```
+
+## Running a Problem
+Example:
+```
+make run year=2015 day=1 part=1
 ```
