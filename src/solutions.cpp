@@ -1,12 +1,3 @@
-// include/solutions.h
-#pragma once
-
-extern "C" {
-   typedef void (*solution_fn)();
-   solution_fn get_solution(unsigned int year, unsigned int day, unsigned int part);
-}
-
-// src/solutions.cpp
 #include "solutions.h"
 
 extern "C" {
