@@ -5,7 +5,7 @@
 // Read the entire input file as a single string
 std::string read_input(int year, int day) {
     // Construct the file path dynamically
-    std::string file_path = "../inputs/" + std::to_string(year) + "/day" + std::to_string(day) + ".txt";
+    std::string file_path = "inputs/" + std::to_string(year) + "/day" + std::to_string(day) + ".txt";
 
     // Open the file
     std::ifstream input_file(file_path);
@@ -22,7 +22,7 @@ std::string read_input(int year, int day) {
 // Read the input file line by line into a vector of strings
 std::vector<std::string> read_input_lines(int year, int day) {
     // Construct the file path dynamically
-    std::string file_path = "../inputs/" + std::to_string(year) + "/day" + std::to_string(day) + ".txt";
+    std::string file_path = "inputs/" + std::to_string(year) + "/day" + std::to_string(day) + ".txt";
 
     // Open the file
     std::ifstream input_file(file_path);
