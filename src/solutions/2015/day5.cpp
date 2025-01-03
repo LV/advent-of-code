@@ -1,8 +1,10 @@
 #include <iostream>
 #include <unordered_set>
 #include <utility>
+#include "assertion.h"
 #include "utils.h"
 
+namespace y2015_d5 {
 bool containsAtLeastThreeVowels(const std::string &s) {
     int vowelCount = 0;
 
@@ -36,19 +38,26 @@ bool isNiceString(const std::string &s) {
     return containsAtLeastThreeVowels(s) && containsAtLeastOneRepeatingLetter(s) && !containsBadStrings(s);
 }
 
-extern "C" {
-    void solve_part1() {
-        std::vector<std::string> input = read_input_lines(2015, 5);
+int solve_part1(std::vector<std::string> input) {
+    int count = 0;
 
-        int count = 0;
-
-        for (std::string str : input) {
-            if (isNiceString(str)) count++;
-        }
-
-        std::cout << count << "\n";
+    for (std::string str : input) {
+        if (isNiceString(str)) count++;
     }
 
-    void solve_part2() {
+    return count;
+}
+
+int solve_part2() {
+    return 0; // STUB
+}
+} // END_NAMESPACE
+
+extern "C" {
+    void solve_2015_day5_part1() {
+        std::cout << y2015_d5::solve_part1(read_input_lines(2015, 5)) << "\n";
+    }
+
+    void solve_2015_day5_part2() {
     }
 }
